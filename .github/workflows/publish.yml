@@ -15,14 +15,20 @@
 
 name: Publish package
 on:
-  push:
-    tags:
-    - 'v[0-9]+.[0-9]+.[0-9]+'
-    - 'v[0-9]+.[0-9]+.[0-9]+-*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to publish'
+        required: true
+        type: string
+        default: 'v0.0.0'
+
 jobs:
   create-release:
     name: Create new release
     runs-on: ubuntu-latest
     steps:
       - name: Publish
-        uses: toitlang/pkg-publish@v1.5.0
+        uses: toitlang/action-publish@v1.5.0
+        with:
+          tag: ${{ github.event.inputs.version }}
