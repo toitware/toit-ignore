@@ -1,2 +1,3 @@
 # toit-ignore
-Ignore this package.
+
+This package is used for testing.
